@@ -68,6 +68,39 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
     网格布局：固定大小显示点赞的图片内容，左下角显示点赞数
     实时同步：首页中点赞后的图片内容会同步刷新到页面中
 
+# 框架结构
+<img width="4464" height="1378" alt="exported_image (1)" src="https://github.com/user-attachments/assets/eba3d0c1-6caf-488f-b177-54b6e3a5e36b" />
+
+# 技术难点及方案
+## 1.上拉加载数据的判断
+
+  如何判定滑动到瀑布流的底部，以及如何判定何时加载新的数据
+  相应解决方案
+
+
+  mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //只需定义dy方向的上下滑动
+                if (dy > 0) {
+                    StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
+                    if (layoutManager != null) {
+                        // 获取当前屏幕上可见的最后一个 item 的位置，返回每一列的的位置
+                        int[] lastVisibleItemPositions = layoutManager.findLastVisibleItemPositions(null);
+                        //直接根据第一列判定
+                        int lastVisibleItemPosition = lastVisibleItemPositions[0];
+                        // 判断是否滚动到了列表底部
+                        // lastVisibleItemPosition >= adapter.getItemCount() - 1 - 2  提前2个item开始加载
+                        if (lastVisibleItemPosition >= adapter.getItemCount() - 1 - itemBuffer  && !isLoading) {
+                            loadData(count); // 加载更多数据
+                        }
+                    }
+                }
+            }
+        });
+
+        
 
 # 使用演示
   ## 服务端
