@@ -108,6 +108,14 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
 <img width="1468" height="838" alt="截屏2025-11-30 15 43 49" src="https://github.com/user-attachments/assets/e76643f6-81d3-4488-9d15-4ae4d7a5a51e" />
 
   Run'app'构建项目并执行，即可运行客户端
+
+  <img width="1466" height="834" alt="截屏2025-11-30 15 48 51" src="https://github.com/user-attachments/assets/bf9f0e05-0e63-4cae-a920-0a9952eb60f7" />
+
+如需清空数据库中，对于点赞数据的记录，可在/fangdouyin/app/src/main/java/com.example.fangdouyin/item_cardDatabase.java文件中，修改数据库的版本号，数据库的升级或降级会清空数据表，“我”的页面中数据也会相应清除
+
+
+      @Database(entities = {item_card.class}, version = 3, exportSchema = false)
+  
   
 
   
