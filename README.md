@@ -50,7 +50,16 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
 
 ## fangdouyin
   客户端代码，使用java编写
+
+  ### 布局：
+  
+  #### 首页：
   <img width="410" height="911" alt="截屏2025-11-30 13 19 46" src="https://github.com/user-attachments/assets/b509987a-2f0f-4dfe-a252-0808bb2cfbcb" />
+  
+  #### 我：
+  <img width="411" height="911" alt="截屏2025-11-30 13 23 31" src="https://github.com/user-attachments/assets/73cacda6-60a7-41e9-906c-614509779709" />
+
+  
 
   
   
