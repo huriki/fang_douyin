@@ -110,7 +110,7 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
         // lastVisibleItemPosition >= adapter.getItemCount() - 1 - 2  提前2个item开始加载
         lastVisibleItemPosition >= adapter.getItemCount() - 1 - itemBuffer
 
-    即可判断是否已经滑动到瀑布流底部（包含数据缓冲长度）
+  即可判断是否已经滑动到瀑布流底部（包含数据缓冲长度）
 
 ## 2.本地图片的地址记录
   点赞图标的触发事件中，需要将瀑布流中相应的图片保存到本地，且获得保存地址，并将图片地址等相关信息全部写入数据库。由于图片保存涉及到异步操作，需协调等待内容图片和头像图片的保存完成，才能执行数据入库的步骤
@@ -218,11 +218,65 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
   
 
   
-  
-  
+# Debug记录
 
+/fangdouyin/app/src/main/java/com.example.fangdouyin/ImageSaveManager.java中，saveImageFromImageView()负责实现从瀑布流卡片中存储图片
 
+      public void saveImageFromImageView(ImageView imageView, String localPath, SaveCallback callback) {
+        // 先判断是否已保存（避免重复存储）
+        if (isImageExists(localPath)) {
+            callback.onSuccess(localPath);
+            return;
+        }
 
+        // 从 ImageView 提取 bitmap
+        Bitmap bitmap = extractBitmapFromImageView(imageView);
+        if (bitmap == null) {
+            callback.onFailure("无法提取图片（图片未加载或为空）");
+            return;
+        }
+
+        // 子线程异步存储 bitmap
+        SAVE_EXECUTOR.execute(() -> {
+            try {
+                // 创建存储目录（不存在则创建）
+                File targetFile = new File(localPath);
+                File parentDir = targetFile.getParentFile();
+                if (!parentDir.exists()) {
+                    parentDir.mkdirs(); // 递归创建目录
+                }
+
+                // 保存 bitmap 到文件（JPEG 格式，质量 90%，兼顾质量和体积）
+                try (FileOutputStream fos = new FileOutputStream(targetFile)) {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+                    fos.flush(); // 强制写入
+                }
+
+                // 保存成功：主线程回调
+                ((FragmentActivity) context).runOnUiThread(() -> {
+                    callback.onSuccess(localPath);
+                    //bitmap.recycle(); // 释放内存，避免 OOM
+                });
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 保存失败：主线程回调
+                ((FragmentActivity) context).runOnUiThread(() ->
+                        callback.onFailure("保存失败：" + e.getMessage())
+                );
+            }
+        });
+    }
+
+其中，
+
+                // 保存成功：主线程回调
+                ((FragmentActivity) context).runOnUiThread(() -> {
+                    callback.onSuccess(localPath);
+                    //bitmap.recycle(); // 释放内存，避免 OOM
+                });
+                
+不能执行“bitmap.recycle();”来对内存进行管理。相关数据内存由瀑布流组件管理，不然报错。
     
 
 
