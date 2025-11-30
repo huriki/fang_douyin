@@ -14,7 +14,7 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
 
 ## image_mock
 
-  ### get_image.ipynb
+  #### get_image.ipynb
     根据百度图片的搜索结果，模拟卡片数据
     使用selenium，分别抓取“拍摄”、“头像”的搜索结果
         “拍摄”的搜索结果中，抓取图片链接、图片标题；“头像”的搜索结果中，抓取图片链接
@@ -32,4 +32,21 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
       "ImageHeight": height,  # 内容图片高度
       "HeadUrl": head_image_url  # 头像图片链接
       }
+
+  #### server.py
+    使用Flask搭建简易数据服务器
+
+    http://localhost:20000/ #服务器端口
+    
+    访问接口：
+        "/api/itemcard"  # 接口添加 count 参数（可选，默认单次返回10条数据，客户端请求时传入，如 /api/itemcard?count=5） 
+        "/api/find“  # 接口添加 id 参数（必选，客户端请求时传入，如 /api/find?id=5）
+        "/api/update"  # post类型，
+
+
+
+
+
+
+    
   
