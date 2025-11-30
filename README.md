@@ -89,9 +89,10 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
   最后生成的数据存储为json格式供服务器读取
 
   ### 2.执行image_mock/server.py
-  <img width="988" height="190" alt="截屏2025-11-30 14 13 41" src="https://github.com/user-attachments/assets/db7cf844-c71d-4964-ad0d-8f085fb805d2" />
+  <img width="1018" height="239" alt="截屏2025-11-30 15 40 41" src="https://github.com/user-attachments/assets/7d140964-3bc6-4c6e-a24f-9fad26d7f439" />
 
-  根据Flask返回，可知访问端口为http://198.18.0.1:20000
+
+  根据Flask返回，可知访问端口为http://192.168.8.218:20000
 
   ## 客户端
   <img width="795" height="607" alt="截屏2025-11-30 15 12 22" src="https://github.com/user-attachments/assets/a3e96ca9-4ba4-48f5-891f-540a9c346e52" />
@@ -102,8 +103,11 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
 
   在/fangdouyin/app/src/main/java/com.example.fangdouyin/RetrofitClient.java文件中，修改BASE_URL为上述Flask访问端口
   
-      private static final String BASE_URL = "http://198.18.0.1:20000";
-      
+      private static final String BASE_URL = "http://192.168.8.218:20000";
+
+<img width="1468" height="838" alt="截屏2025-11-30 15 43 49" src="https://github.com/user-attachments/assets/e76643f6-81d3-4488-9d15-4ae4d7a5a51e" />
+
+  Run'app'构建项目并执行，即可运行客户端
   
 
   
