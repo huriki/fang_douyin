@@ -68,6 +68,22 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
     网格布局：固定大小显示点赞的图片内容，左下角显示点赞数
     实时同步：首页中点赞后的图片内容会同步刷新到页面中
 
+
+# 使用演示
+  ## 服务端
+  ### 1.执行image_mock/get_image.ipynb
+    
+  前提是导入相关包，并布置好Chrome浏览器对应的驱动
+  https://developer.chrome.com/docs/chromedriver/downloads/version-selection?hl=zh-cn
+  
+  <img width="1200" height="1011" alt="截屏2025-11-30 13 47 26" src="https://github.com/user-attachments/assets/6663f126-23cf-40e2-a90e-edf2fb58c007" />
+  <img width="911" height="493" alt="截屏2025-11-30 13 50 26" src="https://github.com/user-attachments/assets/26081bd2-db1a-4371-8cd1-d6a1fe040e7f" />
+  <img width="1198" height="1003" alt="截屏2025-11-30 13 56 27" src="https://github.com/user-attachments/assets/13365fa5-4adf-4531-9f45-c5a85fdbffa7" />
+  <img width="967" height="496" alt="截屏2025-11-30 13 58 12" src="https://github.com/user-attachments/assets/8c22dae0-48de-46c4-a911-e7d63fcbcdb6" />
+
+
+
+
   
 
   
