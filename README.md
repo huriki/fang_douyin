@@ -72,13 +72,16 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
 <img width="4464" height="1378" alt="exported_image (1)" src="https://github.com/user-attachments/assets/eba3d0c1-6caf-488f-b177-54b6e3a5e36b" />
 
 # 技术难点及方案
-## 1.上拉加载数据的判断
+## 1.上拉加载数据的判定
 
   如何判定滑动到瀑布流的底部，以及如何判定何时加载新的数据
-  相应解决方案
 
+  ###
+      //定义下滑瀑布流的缓冲长度，单列计数
+      private int itemBuffer = 2;
 
-  mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      
+      mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -100,7 +103,68 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
             }
         });
 
-        
+  滑动瀑布流时，通过mRecyclerView.addOnScrollListener的方法触发滑动判断：
+  在滑动判断中，layoutManager.findLastVisibleItemPositions获得当前屏幕上可见的每一列最后一个 item 的位置，通过与存储瀑布流卡片的数据总长度进行比较
+      
+        // 判断是否滚动到了列表底部
+        // lastVisibleItemPosition >= adapter.getItemCount() - 1 - 2  提前2个item开始加载
+        lastVisibleItemPosition >= adapter.getItemCount() - 1 - itemBuffer
+
+    即可判断是否已经滑动到瀑布流底部（包含数据缓冲长度）
+
+## 2.本地图片的地址记录
+  点赞图标的触发事件中，需要将瀑布流中相应的图片保存到本地，且获得保存地址，并将图片地址等相关信息全部写入数据库。由于图片保存涉及到异步操作，需协调等待内容图片和头像图片的保存完成，才能执行数据入库的步骤
+
+                    //将瀑布流卡片中内容图片和头像图片异步存储，并最后记录到本地数据库中
+                    //执行流程：存储内容图片->存储头像图片->本地数据库中添加该条记录
+                    // 步骤1：保存内容图片
+                    String postLocalPath = imageSaveManager.getPostImageLocalPath(bean.getItemId());
+                    imageSaveManager.saveImageFromImageView(
+                            holder.imageView,
+                            postLocalPath,
+                            new ImageSaveManager.SaveCallback() {
+                                @Override
+                                public void onSuccess(String savedPostPath) {
+                                    bean.setLocalPostImagePath(savedPostPath);//内容图片的存储地址同步到list<>中
+                                    itemCard.setImageLocalPath(savedPostPath);//内容图片的存储地址同步到数据库接口类中
+                                    Log.d("SaveImage","图片存储地址："+savedPostPath);
+
+
+                                    // 步骤2：保存头像
+                                    String avatarLocalPath = imageSaveManager.getAvatarLocalPath(bean.getItemId());
+                                    imageSaveManager.saveImageFromImageView(
+                                            holder.headView,
+                                            avatarLocalPath,
+                                            new ImageSaveManager.SaveCallback(){
+                                                @Override
+                                                public void onSuccess(String savedAvatarPath) {
+                                                    // 头像保存成功，更新本地路径
+                                                    bean.setLocalAvatarPath(savedAvatarPath);//头像图片的存储地址同步到list<>中
+                                                    itemCard.setAvatarLocalPath(savedAvatarPath);//头像图片的存储地址同步到数据库接口类中
+                                                    Log.d("SaveImage","头像存储地址："+savedAvatarPath);
+
+                                                    // 步骤3：数据入库
+                                                    insert(itemCard);
+
+                                                }
+                                                @Override
+                                                public void onFailure(String errorMsg) {
+                                                    //Toast.makeText(context, "头像保存失败：" + errorMsg, Toast.LENGTH_SHORT).show();
+                                                    Log.e("SaveImage","头像保存失败：" + errorMsg);
+                                                }
+
+                                            }
+                                    );
+                                }
+                                @Override
+                                public void onFailure(String errorMsg) {
+                                    //Toast.makeText(context, "内容图保存失败：" + errorMsg, Toast.LENGTH_SHORT).show();
+                                    Log.e("SaveImage","内容图保存失败：" + errorMsg);
+                                }
+
+                            }
+                    );
+
 
 # 使用演示
   ## 服务端
