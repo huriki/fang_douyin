@@ -36,12 +36,17 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
   #### server.py
     使用Flask搭建简易数据服务器
 
-    http://localhost:20000/ #服务器端口
+    http://localhost:20000/ #服务器端口，同一网段的客户端访问时根据服务器IP替换localhost
     
     访问接口：
         "/api/itemcard"  # 接口添加 count 参数（可选，默认单次返回10条数据，客户端请求时传入，如 /api/itemcard?count=5） 
-        "/api/find“  # 接口添加 id 参数（必选，客户端请求时传入，如 /api/find?id=5）
-        "/api/update"  # post类型，
+        "/api/find"  # 接口添加 id 参数（必选，客户端请求时传入，如 /api/find?id=5）
+        "/api/update"  # post类型，传入json数据，{ "item_id": item_card ID（必传）,"operation": 操作类型：add/sub（必传）}
+
+    接口功能：
+        "/api/itemcard"：返回特定数量的卡片数据（默认10条，且每次返回的数据不重复，且假设返回的都是客户端没有点赞浏览过的数据
+        "/api/find"：根据指定的卡片id，返回该条卡片数据
+        "/api/update"：指定的id卡片的数据，根据操作类型"add"或者"sub"，对该条卡片的点赞数+1或者-1
 
 
 
