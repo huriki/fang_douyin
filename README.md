@@ -81,10 +81,18 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
   <img width="1196" height="1007" alt="截屏2025-11-30 14 02 55" src="https://github.com/user-attachments/assets/d2aa76b1-6be5-4674-871b-34bf89811b56" />
   <img width="776" height="499" alt="截屏2025-11-30 14 03 42" src="https://github.com/user-attachments/assets/f65baa06-bd09-4e25-9904-a62b10500bad" />
   <img width="438" height="111" alt="截屏2025-11-30 14 06 23" src="https://github.com/user-attachments/assets/7575b6f2-b366-4847-addc-f68b1eac6c37" />
-    内容图片的数量需大于等于头像图片的数量，以保证最后数据的完整性
+    
+  内容图片的数量需大于等于头像图片的数量，以保证最后数据的完整性
 
   <img width="809" height="413" alt="截屏2025-11-30 14 06 43" src="https://github.com/user-attachments/assets/e4a101ca-2aef-48a2-b16f-cecc73887b20" />
+  
   最后生成的数据存储为json格式供服务器读取
+
+  ### 2.执行image_mock/server.py
+  <img width="988" height="190" alt="截屏2025-11-30 14 13 41" src="https://github.com/user-attachments/assets/db7cf844-c71d-4964-ad0d-8f085fb805d2" />
+
+  根据Flask返回，可知访问端口为http://198.18.0.1:20000
+
 
     
 
