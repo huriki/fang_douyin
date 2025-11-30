@@ -9,3 +9,27 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
   - 数据配置管理：支持 Mock 数据模拟，配置网络图片资源，确保数据可动态更新
   - 预加载优化：支持卡片预加载和图片预加载，提升滑动流畅度
   - 图片缓存：实现图片缓存策略
+
+# 目录/文件说明
+
+## image_mock
+
+  ### get_image.ipynb
+    根据百度图片的搜索结果，模拟卡片数据
+    使用selenium，分别抓取“拍摄”、“头像”的搜索结果
+        “拍摄”的搜索结果中，抓取图片链接、图片标题；“头像”的搜索结果中，抓取图片链接
+        利用正则匹配，提取“拍摄”结果链接中的图片高宽
+    从字库中随机生成用户名，并随机生成点赞数
+
+    上述数据组成单条卡片内容
+      {
+      "ItemId": item_id,  # 记录卡片编号（自增）
+      "Title": title,  # 标题
+      "UserName": generate_username(),  # 用户名
+      "LikeNum": like_num,  # 点赞数
+      "ImageUrl": item_image_url,  # 内容图片链接
+      "ImageWidth": width,  # 内容图片宽度
+      "ImageHeight": height,  # 内容图片高度
+      "HeadUrl": head_image_url  # 头像图片链接
+      }
+  
