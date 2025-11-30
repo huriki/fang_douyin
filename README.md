@@ -93,6 +93,24 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
 
   根据Flask返回，可知访问端口为http://198.18.0.1:20000
 
+  ## 客户端
+  <img width="795" height="607" alt="截屏2025-11-30 15 12 22" src="https://github.com/user-attachments/assets/a3e96ca9-4ba4-48f5-891f-540a9c346e52" />
+
+  通过android studio打开fangdouyin项目文件
+
+  <img width="1465" height="839" alt="截屏2025-11-30 15 30 16" src="https://github.com/user-attachments/assets/23e837fd-fe68-473f-8ad9-dd6705915eb1" />
+
+  在/fangdouyin/app/src/main/java/com.example.fangdouyin/RetrofitClient.java文件中，修改BASE_URL为上述Flask访问端口
+  
+      private static final String BASE_URL = "http://198.18.0.1:20000";
+      
+  
+
+  
+  
+  
+
+
 
     
 
