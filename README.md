@@ -48,7 +48,12 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
         "/api/find"：根据指定的卡片id，返回该条卡片数据
         "/api/update"：指定的id卡片的数据，根据操作类型"add"或者"sub"，对该条卡片的点赞数+1或者-1
 
+## fangdouyin
+  客户端代码，使用java编写
+  <img width="410" height="911" alt="截屏2025-11-30 13 19 46" src="https://github.com/user-attachments/assets/b509987a-2f0f-4dfe-a252-0808bb2cfbcb" />
 
+  
+  
 
 
 
