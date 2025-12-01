@@ -181,7 +181,7 @@ TikTok研发-国际化生活服务业务- 客户端作业：高仿抖音“经�
   <img width="776" height="499" alt="截屏2025-11-30 14 03 42" src="https://github.com/user-attachments/assets/f65baa06-bd09-4e25-9904-a62b10500bad" />
   <img width="438" height="111" alt="截屏2025-11-30 14 06 23" src="https://github.com/user-attachments/assets/7575b6f2-b366-4847-addc-f68b1eac6c37" />
     
-  内容图片的数量需大于等于头像图片的数量，以保证最后数据的完整性
+  头像图片的数量需大于等于内容图片的数量，以保证最后数据的完整性
 
   <img width="809" height="413" alt="截屏2025-11-30 14 06 43" src="https://github.com/user-attachments/assets/e4a101ca-2aef-48a2-b16f-cecc73887b20" />
   
